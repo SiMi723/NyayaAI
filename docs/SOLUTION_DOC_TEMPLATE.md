@@ -1,19 +1,30 @@
-# NyayaAI — AI Legal Action Copilot (KukuFM Problem 2)
+# NyayaAI - Solution document drafting checklist
 
-## Problem and scope
-NyayaAI focuses on Indian rental security-deposit disputes. It helps a tenant organise a narrative into a structured case, identify supporting evidence, understand what information is missing, and draft a neutral refund request. It is not designed to cover every area of Indian law.
+Use this file only as a drafting aid. The submitted two-page document is `NyayaAI_Solution_Document.pdf`; keep its claims consistent with the code, test records and actual deployment status.
 
-## How it works
-The Streamlit interface accepts English, Hindi or Hinglish text and PDF/TXT supporting documents. A provider adapter calls Gemini when a user supplies an API key; otherwise the interface clearly labels deterministic demo mode. The application separates user-reported facts from document-supported excerpts, flags urgent situations for human assistance, and uses a local source registry plus exact-quote citation validator. The starter registry currently has official portal links but no curated statute passages, so the app abstains from definitive legal citations.
+## Problem choice and framing
+- Name the user and one narrowly scoped everyday legal problem.
+- State assumptions and what is out of scope.
 
-## Human and code boundaries
-The language model organises the narrative and drafts plain-language communication. Deterministic code handles document-safety flags, basic escalation patterns, provenance labels, retrieval filters, citation checks and append-only run capture. A qualified lawyer remains necessary for legal interpretation, court proceedings, urgent eviction/lockout, threats, deadlines and complex contracts.
+## Prototype and approach
+- Explain the user journey from intake to a practical output.
+- Separate what the language model does, what deterministic code does and when a human/lawyer is required.
+- Explain how a compatible model provider can be changed and identify likely cost/scale constraints.
+
+## Legal reliability
+- Describe the source registry, retrieval conditions, citation checks, abstention and escalation.
+- Do not describe portal links as verified legal passages.
 
 ## Quality evidence
-Automated unit tests: 14 passed (see `outputs/unit_test_results.txt`). Eight synthetic cases are in `data/synthetic_cases.json`. Add actual live model run outcomes here only after running `python scripts/run_evaluations.py --live`, inspecting each raw JSON file and completing `outputs/evaluation.csv`.
+- Recorded automated code audit: 17 unit tests passed.
+- Eight synthetic cases are provided in `data/synthetic_cases.json`.
+- The included eight raw JSON records are deterministic DEMO simulations, not genuine Gemini outputs.
+- Do not claim an end-to-end pass rate until genuine live runs are inspected and human-reviewed.
 
-## Failures and limitations
-The starter registry contains no verified statutory text; legal answers are therefore withheld. Rule-based escalation can miss edge cases. Citation matching does not prove applicability. PDF text extraction may fail on scans. Hindi/Hinglish output and all live model outputs need manual review. The tool is not hallucination-free, legally certified or a substitute for an advocate.
+## Failures, limitations and learning
+- Include a real implementation mistake or model/tool failure, what evidence exposed it, what was changed and what remains unresolved.
+- Distinguish a working UI, a successful API call and a reliable legal answer.
 
 ## Tools used
-ChatGPT for project planning/code review; Antigravity/Gemini may be used for local iteration; Python, Streamlit, Pydantic, pypdf and Google GenAI SDK. Update this section to accurately describe your actual use and any observed tool mistake before submission.
+- List only tools actually used.
+- State one concrete error or limitation from AI-assisted development and how it was checked/corrected.

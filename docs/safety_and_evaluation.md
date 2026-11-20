@@ -81,4 +81,3 @@ The code includes safety controls and automated unit tests. The eight end-to-end
 - Eight synthetic cases were executed in deterministic DEMO mode and captured as raw JSON; they are not live Gemini runs and have not been manually quality-scored.
 - The runtime used for the audit did not have Streamlit installed, and package installation was blocked by unavailable network access. The browser UI launch was therefore not verified in this environment.
 - The date-conflict heuristic was extended to detect written day-month dates without a year, as used in TC08. This remains a simple English-language heuristic.
-- The public M1 research repository was reviewed as a reference only; its checkpoints are not included in the public tree and no M1 weights were loaded.

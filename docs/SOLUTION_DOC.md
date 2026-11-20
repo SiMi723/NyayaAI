@@ -1,31 +1,45 @@
-# NyayaAI - AI Legal Action Copilot for Indian Rental Deposit Disputes
+# NyayaAI - AI Legal Action Copilot
 
-## Problem choice and scope
+*Kuku AI Generalist Assignment | Problem 2 | Focus: Indian rental security-deposit disputes*
 
-I selected Problem 2 and narrowed it to one recurring everyday problem: a tenant vacates a rented home, but the landlord withholds the security deposit or disputes deductions for repairs or painting. A narrow scope makes it possible to build and test a useful workflow without claiming to cover all Indian law. The prototype accepts free-text in English, Hindi or Hinglish and optional PDF/TXT documents. Voice input, scanned-PDF OCR, formal legal notices and legal representation are outside the current scope.
+## Problem choice, user and scope
 
-## How the prototype works
+I chose Problem 2 because everyday rental disputes can leave people unsure what happened, what evidence matters and how to ask for a resolution. I narrowed the product to one recurring situation: a tenant has vacated a rented home, but the landlord has not returned the security deposit or disputes deductions for painting or repairs. A narrow scope makes the prototype testable without claiming to cover all Indian law.
 
-A user describes the dispute and reports the property city/state. NyayaAI extracts selectable PDF text or reads TXT, then organises the narrative into a case summary, missing-information questions, an evidence checklist, practical next steps and a neutral refund-request draft. Gemini is called when an API key is configured; otherwise the app clearly identifies its deterministic DEMO simulation. Basic deterministic checks flag selected urgent situations, instruction-like text in uploaded documents and possible conflicting tenancy dates. User narratives are labelled USER_REPORTED; extracted document excerpts are labelled DOCUMENT_SUPPORTED. These labels do not prove authenticity.
+The intended user is a tenant who can describe the problem in English, Hindi or Hinglish. The current prototype accepts text and optional selectable-text PDF/TXT documents. Voice input, OCR for scanned PDFs, formal legal notices, court filings and legal representation are outside this version. I assume the user supplies the property city/state and that uploaded files are evidence to organise, not proof of authenticity.
+
+## How it works
+
+1. The user describes the dispute and provides the property's city/state.
+2. The user may upload a rental agreement, notice or supporting PDF/TXT. The app extracts selectable text and warns when no text can be extracted.
+3. Gemini organises the narrative into a case summary, missing-information questions, evidence checklist, practical next steps and a neutral refund-request draft. Without an API key, the app clearly identifies its deterministic DEMO mode.
+4. Python applies basic checks for selected urgent situations, suspicious instruction-like text in documents, provenance labels and possible date conflicts. It also retrieves only active legal-source records containing exact text and validates returned source IDs, provision labels and quotations.
+5. The user reviews the output. A qualified advocate remains responsible for legal interpretation and formal proceedings.
+
+The intended output is an organised case file the tenant can review and act on, not a prediction of who will win. A useful result separates what the user reported from what appears in an uploaded file, makes unknowns visible and helps prepare a clear, neutral request without inventing legal authority.
 
 ## AI, code and human roles
 
-Gemini handles language understanding, summarisation and drafting. Python handles file parsing, retrieval over the local legal-source registry, provenance labels, selected escalation and date checks, citation validation and append-only raw-output capture. A human must review every draft and disputed fact. A qualified advocate is necessary for court proceedings, urgent lockout or eviction risks, imminent deadlines, threats and complex contractual interpretation.
+Gemini handles language understanding, summarisation and drafting. Deterministic Python handles file parsing, source filtering, selected escalation/date checks, provenance labels, citation checks and append-only raw-output capture. A human reviews disputed facts and every draft; a qualified advocate is needed for court matters, urgent lockout/eviction risks, imminent deadlines, threats and complex contractual interpretation. The model provider is isolated behind an adapter so another compatible provider can be connected later.
 
-## M1 research reference
+## Legal reliability and abstention
 
-I reviewed the public `SPIKIE-24/LLM` repository as a technical reference. Its README describes M1 as a 12-layer, 768-hidden-size, 12-head multi-head-attention Transformer using RoPE, pre-RMSNorm and GELU. Its Phase 2 legal NER task uses character-boundary prediction. The public repository contains README and model notebooks, but not deployable checkpoints or a standalone model package. M1 was not integrated. Its judgment-oriented labels are not rental-agreement labels; adaptation would require matching model/tokenizer assets, a rental-specific annotation schema, representative labelled tenancy documents and separate evaluation. The large local checkpoint and matching tokenizer/model assets are not part of this submission.
+The starter registry lists official discovery portals but contains no curated, versioned statutory passages. A portal URL is not legal evidence. NyayaAI therefore abstains from definitive statutory citations at present. If exact text is added later, the validator checks whether the source was retrieved and whether its provision and quotation match. That check does not establish that the law applies to the user's facts or remains in force. The app is not hallucination-free and must not replace a lawyer.
 
-## Legal reliability
+## Quality checks, honest failures and what I learned
 
-The source registry currently contains official discovery-portal links only, with no curated, versioned statutory passages. Portal URLs are not treated as legal evidence. As a result, NyayaAI abstains from definitive legal citations. If a passage is later added, the validator checks the retrieved source ID, provision and exact quote. This does not determine whether a rule applies to a particular tenancy or remains legally operative. Unknown jurisdiction, missing evidence and selected high-risk situations produce abstention or lawyer-escalation messages.
+I created eight synthetic cases: deposit not returned; no written agreement; disputed repair deductions; missing jurisdiction; a request to invent a legal provision; a suspicious uploaded notice; an imminent lockout; and conflicting tenancy dates. The recorded deterministic runs are preserved as raw JSON and clearly labelled DEMO. The code audit passed 17 automated unit tests. These results test code paths; they are not genuine Gemini accuracy scores and the end-to-end cases remain unreviewed until run live and checked by a person.
 
-## Quality checks, failures and limitations
+The first local version opened, but displayed DEMO MODE because I had not configured a live API key. I initially spent time waiting for an automated coding agent that was not showing visible progress. I changed approach: I inspected the project structure, kept the scope small, checked the provider and pipeline separately, and used VS Code and Git to make the application reproducible. During code review I found a real bug: the evaluation runner checked for an API key but did not pass it into the pipeline, so a requested live run could fall back to DEMO. I fixed the key hand-off, added a guard against non-live results in live mode, corrected the documented launch path and added regression tests.
 
-The code audit passes 17 automated unit tests. Eight synthetic cases (TC01-TC08) were run and their raw outputs captured in DEMO mode. They are deterministic simulations, not genuine AI results, and remain NOT_YET_REVIEWED in the evaluation tracker. The tests cover deposit not returned, no written agreement, disputed deductions, missing jurisdiction, fabricated-law request, suspicious uploaded notice, imminent lockout and conflicting dates. The date-conflict heuristic is intentionally basic and English-oriented. The prototype does not yet provide full field-level extraction or a chronological evidence timeline. Hindi/Hinglish model quality requires live testing. The browser launch was not verified in the audit environment because Streamlit was not installed and package installation was unavailable.
+After deployment, the first Gemini live request returned HTTP 503 (temporary model unavailability). The Streamlit application was still running; the failure was at the model service. I kept the error visible, changed the model selection and retried rather than presenting a failed call as a successful AI result. Model availability and live quality still need repeat testing. This was a useful reminder that a working interface, a reachable API and a reliable answer are three different things.
 
-A concrete implementation mistake found during review was that the initial evaluation runner checked for an API key but did not pass it into the pipeline. A requested `--live` run could therefore fall back to DEMO. I fixed the argument passing, added a guard that rejects non-live results in live mode, corrected the documented script import path, and added regression tests.
+## Limitations, scale and tools
 
-## Scale and tools
+Current limitations include no verified statute passages, no voice input, no OCR for scanned PDFs, incomplete field-level extraction and no full chronological evidence ledger. The date and escalation checks are simple heuristics and can miss edge cases. Hindi/Hinglish quality and all live outputs need manual review. Eight DEMO records do not establish legal accuracy.
 
-A production version would need a reviewed, jurisdiction- and date-aware corpus of official tenancy laws, source versioning, stronger multilingual extraction, rental-specific annotated data, a chronological evidence ledger and advocate review for legal interpretations. Model providers can be swapped through the provider adapter. Tools used: Antigravity/Gemini for the initial scaffold (as supplied in the project workspace), ChatGPT for code review and implementation fixes, and Python, Streamlit, Pydantic, pypdf, Google GenAI and pytest in the project.
+To scale, I would add a reviewed, jurisdiction- and date-aware corpus of official tenancy material; rental-specific annotated examples; stronger multilingual extraction; a structured event/evidence ledger; monitoring for model failures; and advocate review for high-risk cases. The provider adapter makes model replacement possible without redesigning the user workflow.
+
+Tools used: Antigravity and Gemini during initial prototyping; ChatGPT for code generation, review and debugging; VS Code for local development; Python, Streamlit, Pydantic, pypdf, Google GenAI SDK and pytest for implementation; GitHub for version control; and Streamlit Community Cloud for deployment. ChatGPT-assisted code was reviewed and tested rather than treated as automatically correct. One concrete tool/code failure and its correction are described above.
+
+**Submission status:** Public runnable prototype and repository are available; 17 automated unit tests passed in the recorded audit; eight synthetic DEMO raw outputs are included. Genuine live end-to-end runs, manual output scoring and further browser-level testing remain necessary. No legal certification or guaranteed outcome is claimed.
