@@ -1,0 +1,35 @@
+{
+  "test_id": "TC02",
+  "timestamp": "2026-11-20T16:22:16.583320+00:00",
+  "mode": "DEMO",
+  "model_id": "DEMO_SIMULATION",
+  "original_input": {
+    "test_id": "TC02",
+    "input": "I rented a room in Jaipur, Rajasthan without a written agreement. The landlord took ₹15,000 deposit and now refuses to return it.",
+    "document_text": "",
+    "jurisdiction": "Rajasthan"
+  },
+  "retrieved_source_passages": [],
+  "unedited_raw_model_response": "{\n  \"summary\": \"You reported a rental security-deposit dispute. This is a user-reported account, not an independently verified finding. The amount mentioned is ₹15,000.\",\n  \"missing_information\": [\n    \"Which Indian state and city is the rented property in?\",\n    \"What are the move-out date and the date the deposit was due to be returned?\",\n    \"Do you have the rental agreement, payment proof, move-in/move-out photos, and written communication?\"\n  ],\n  \"evidence_checklist\": [\n    \"Bank/UPI payment proof, rent receipts, messages, emails, ID/address records and other evidence showing the rental arrangement and deposit payment\",\n    \"Move-in and move-out photos/videos, with dates if available\",\n    \"Itemised deduction list and bills/receipts shared by the landlord\",\n    \"Messages, emails or call notes about the deposit and handover\"\n  ],\n  \"practical_steps\": [\n    \"Prepare a dated timeline of payment, notice to vacate, handover and follow-up messages.\",\n    \"Ask the landlord in writing for the deposit balance and an itemised explanation of each deduction.\",\n    \"Keep original documents and send copies; avoid threats or altering records.\",\n    \"Get state-specific legal guidance before relying on a statutory claim or starting proceedings.\"\n  ],\n  \"refund_request_draft\": \"Subject: Request for return of rental security deposit\\n\\nDear [Landlord Name],\\n\\nI am writing regarding the security deposit of [amount] paid for the property at [address]. I vacated and handed over the property on [date]. Please arrange return of the refundable balance by [reasonable date] and share an itemised explanation, along with supporting bills/receipts, for any proposed deductions.\\n\\nPlease confirm the payment status in writing. I am happy to resolve this matter amicably.\\n\\nRegards,\\n[Your Name]\",\n  \"legal_analysis\": \"\",\n  \"citations\": [],\n  \"model_notes\": \"DEMO SIMULATION only. This is not a genuine LLM response or legal opinion.\"\n}",
+  "citation_validator_result": {
+    "all_valid": null,
+    "citation_count": 0,
+    "valid_count": 0,
+    "invalid_count": 0,
+    "checks": [],
+    "important_limit": "A matching citation does not establish legal applicability or correctness of interpretation."
+  },
+  "document_safety": {
+    "is_suspicious": false,
+    "matched_patterns": [],
+    "handling": "No uploaded document provided.",
+    "case_consistency": {
+      "possible_conflict": false,
+      "date_mentions": [],
+      "note": "No obvious date conflict detected by the simple rule."
+    }
+  },
+  "abstention_state": "INSUFFICIENT_EVIDENCE",
+  "final_post_validation_response": "## Your rental-deposit case summary\nYou reported a rental security-deposit dispute. This is a user-reported account, not an independently verified finding. The amount mentioned is ₹15,000.\n\n**Legal-status note: Insufficient verified legal evidence.** I do not have an applicable, locally verified legal source passage for this question, so I will not name a law, section, case or deadline.\n\n### Information still needed\n- Which Indian state and city is the rented property in?\n- What are the move-out date and the date the deposit was due to be returned?\n- Do you have the rental agreement, payment proof, move-in/move-out photos, and written communication?\n\n### Evidence to organise\n- Bank/UPI payment proof, rent receipts, messages, emails, ID/address records and other evidence showing the rental arrangement and deposit payment\n- Move-in and move-out photos/videos, with dates if available\n- Itemised deduction list and bills/receipts shared by the landlord\n- Messages, emails or call notes about the deposit and handover\n\n### Practical next steps\n- Prepare a dated timeline of payment, notice to vacate, handover and follow-up messages.\n- Ask the landlord in writing for the deposit balance and an itemised explanation of each deduction.\n- Keep original documents and send copies; avoid threats or altering records.\n- Get state-specific legal guidance before relying on a statutory claim or starting proceedings.\n\n### Draft message (review and edit before sending)\nSubject: Request for return of rental security deposit\n\nDear [Landlord Name],\n\nI am writing regarding the security deposit of [amount] paid for the property at [address]. I vacated and handed over the property on [date]. Please arrange return of the refundable balance by [reasonable date] and share an itemised explanation, along with supporting bills/receipts, for any proposed deductions.\n\nPlease confirm the payment status in writing. I am happy to resolve this matter amicably.\n\nRegards,\n[Your Name]\n\n**Important:** NyayaAI is an informational case-organisation tool, not a law firm. It does not provide legal representation. Do not rely on this draft as a formal legal notice without checking it.",
+  "note": "DEMO records are simulations, not genuine model outputs."
+}

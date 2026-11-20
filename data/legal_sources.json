@@ -1,0 +1,58 @@
+{
+  "registry_version": "0.1",
+  "description": "Starter source registry. Portal entries are discovery links only; they are NOT legal text and must not be cited as proof of a legal rule. Add reviewed, exact official source passages before enabling statutory citations.",
+  "sources": [
+    {
+      "source_id": "PORTAL_INDIA_CODE",
+      "title": "India Code — Official Central and State legislation portal",
+      "url": "https://www.indiacode.nic.in/",
+      "jurisdiction": "India",
+      "provision": "",
+      "version": null,
+      "effective_date": null,
+      "source_text": "",
+      "active": false,
+      "record_type": "portal_only",
+      "notes": "Discovery portal only. No legislation text has been curated into this starter registry."
+    },
+    {
+      "source_id": "PORTAL_NALSA",
+      "title": "National Legal Services Authority",
+      "url": "https://nalsa.gov.in/",
+      "jurisdiction": "India",
+      "provision": "",
+      "version": null,
+      "effective_date": null,
+      "source_text": "",
+      "active": false,
+      "record_type": "portal_only",
+      "notes": "Official legal-aid information portal; this registry does not reproduce or verify any legal rule from it."
+    },
+    {
+      "source_id": "PORTAL_LEGISLATIVE_DEPARTMENT",
+      "title": "Legislative Department, Government of India",
+      "url": "https://legislative.gov.in/",
+      "jurisdiction": "India",
+      "provision": "",
+      "version": null,
+      "effective_date": null,
+      "source_text": "",
+      "active": false,
+      "record_type": "portal_only",
+      "notes": "Official portal link only; no source passage is loaded."
+    },
+    {
+      "source_id": "PORTAL_SUPREME_COURT",
+      "title": "Supreme Court of India",
+      "url": "https://www.sci.gov.in/",
+      "jurisdiction": "India",
+      "provision": "",
+      "version": null,
+      "effective_date": null,
+      "source_text": "",
+      "active": false,
+      "record_type": "portal_only",
+      "notes": "Official portal link only; no judgment passage is loaded."
+    }
+  ]
+}

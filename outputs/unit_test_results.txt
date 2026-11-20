@@ -1,0 +1,7 @@
+NyayaAI automated unit tests
+Run performed: 2026-11-20
+Command: python -m pytest -q
+Result: 17 passed
+Syntax check: python -m compileall -q app.py nyayaai scripts tests
+Result: passed (no syntax errors)
+Scope note: These are deterministic unit tests for pipeline, safety, citations and evaluation-runner behaviour. They are NOT live Gemini end-to-end evaluations and do not prove legal accuracy.
